@@ -10,7 +10,7 @@ from PIL import Image
 
 
 from MODEL_TORCH import EnhancerModel as EnhancerModelTORCH
-from cnnimagequalityenhancement_final.MODEL_TF import EnhancerModelTF
+from MODEL_TF import EnhancerModelTF
 
 
 def cal_psnr(img_orig, img_out):
@@ -60,7 +60,7 @@ def LoadImageEnhancementModelTF(fw,fh):
 
 def LoadImageEnhancementModelTORCH(fw,fh):
     enhancer = EnhancerModelTORCH()
-    enhancer.load_state_dict(torch.load("enhancer_140_23.7589.pt", weights_only=True))
+    enhancer.load_state_dict(torch.load("/home/anmilka/different/cnnimagequalityenhancement_/enhancer_154_23.7598.pt", weights_only=True))
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     enhancer.to(device)
@@ -221,7 +221,3 @@ enhancerTF = LoadImageEnhancementModelTF(w,h)
 enhancerTORCH = LoadImageEnhancementModelTORCH(w,h)
 
 ShowFramePSNRPerformance(enhancerTF, enhancerTORCH, testfolderRawYuv,testfolderCompYuv,0,100,w,h)
-
-ShowFramePSNRPerformance(enhancerTF, enhancerTORCH, testfolderRawYuv,testfolderCompYuv,100,200,w,h)
-
-ShowFramePSNRPerformance(enhancerTF, enhancerTORCH, testfolderRawYuv,testfolderCompYuv,200,300,w,h)
